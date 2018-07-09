@@ -470,7 +470,7 @@ open class PieChartView: PieRadarChartViewBase
     
     open override var radius: CGFloat
     {
-        return _circleBox.width / 2.0
+        return _circleBox.width / 2.0 - 30.0
     }
     
     /// - returns: The circlebox, the boundingbox of the pie-chart slices

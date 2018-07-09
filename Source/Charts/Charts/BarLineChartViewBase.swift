@@ -717,7 +717,7 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
                     if _outerScrollView !== nil
                     {
                         // Prevent the parent scroll view from scrolling
-                        _outerScrollView?.nsuiIsScrollEnabled = false
+                        //_outerScrollView?.nsuiIsScrollEnabled = false
                     }
                 }
                 
@@ -940,11 +940,18 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
             
             // If there is two scrollview together, we pick the superview of the inner scrollview.
             // In the case of UITableViewWrepperView, the superview will be UITableView
-            if let superViewOfScrollView = scrollView?.superview,
-                superViewOfScrollView is NSUIScrollView
-            {
-                scrollView = superViewOfScrollView
+            var superViewOfScrollView = scrollView?.superview
+            while !(superViewOfScrollView?.isKind(of: NSWindow.self))! {
+                if (superViewOfScrollView?.isKind(of: NSUIScrollView.self))! {
+                    scrollView = superViewOfScrollView
+                }
+                superViewOfScrollView = superViewOfScrollView?.superview;
             }
+//            if let superViewOfScrollView = scrollView?.superview,
+//                superViewOfScrollView is NSUIScrollView
+//            {
+//                scrollView = superViewOfScrollView
+//            }
 
             var foundScrollView = scrollView as? NSUIScrollView
             

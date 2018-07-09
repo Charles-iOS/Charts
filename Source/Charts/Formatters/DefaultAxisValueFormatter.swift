@@ -30,6 +30,9 @@ open class DefaultAxisValueFormatter: NSObject, IAxisValueFormatter
         {
             hasAutoDecimals = false
             _formatter = newValue
+            if _formatter?.numberStyle == NumberFormatter.Style.none {
+                _formatter?.numberStyle = NumberFormatter.Style.decimal;
+            }
         }
     }
 
